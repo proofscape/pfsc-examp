@@ -22,9 +22,10 @@ The set is expected to grow over time, in response to user demand.
 """
 
 from sympy import (
-    AlgebraicField, AlgebraicNumber, Expr, Integer, latex, Matrix, mod_inverse,
-    Poly, QQ, S, Symbol, symbols,
+    AlgebraicField, AlgebraicNumber, binomial, Expr, Integer, latex,
+    Matrix, mod_inverse, Poly, QQ, S, Symbol, symbols,
 )
+from sympy.core.evalf import EvalfMixin
 from sympy.logic.boolalg import Boolean
 from sympy.polys.domains.domain import Domain
 from sympy.polys.matrices import DomainMatrix
@@ -34,7 +35,7 @@ from sympy.polys.numberfields.modules import (
 from sympy.polys.numberfields.primes import PrimeIdeal
 from sympy.polys.polyclasses import ANP
 
-from typing import List, Optional as o, Union as u
+from typing import List, Optional as o, Union as u, Iterable
 
 from displaylang.allow import (
     ArgSpec as a,
@@ -59,6 +60,8 @@ sympy_available_constants = {
 # library, to allow them to accept not just `int` but also `Integer`.
 generalized_builtin_allowed_callables = [
     c(range, [t(Int)]),
+    c(max, [t(fiExpr)]),
+    c(min, [t(fiExpr)]),
 ]
 
 # The "basic" callables are those that will be present in the namespace for all
@@ -74,7 +77,8 @@ sympy_basic_allowed_callables = [
     # special functions.
     c(S, [u[int, float]], name="S"),
 
-    c(latex, [Expr], {'order': s.CNAME}, incomplete=True),
+    c(binomial, [Int, Int]),
+    c(latex, [[Expr], [Matrix]], {'order': s.CNAME}, incomplete=True),
     c(Matrix, [List[List[fiExpr]]], name="Matrix"),
     c(mod_inverse, [Int, Int]),
     c(Poly, [Expr, t(Symbol)], {'modulus': Int}, incomplete=True),
@@ -92,10 +96,18 @@ sympy_other_allowed_callables = [
     c(AlgebraicField.__call__, [List[iExpr]], method_of=AlgebraicField),
     c(AlgebraicField.to_sympy, [ANP], method_of=AlgebraicField),
     c(AlgebraicField.to_alg_num, [ANP], method_of=AlgebraicField),
-    c(Domain.cyclotomic_field, [int],
+    c(Domain.cyclotomic_field, [Int],
       {'ss': bool, 'alias': s.UWORD, 'gen': Symbol, 'root_index': int},
       method_of=Domain),
+    # Allows calling e.n() on any Expr e:
+    c(EvalfMixin.evalf, [Int], method_of=EvalfMixin),
+    c(Expr.expand, [], method_of=Expr),
+    c(Expr.subs, [
+        [fiExpr, fiExpr],
+        [Iterable]
+    ], {'simultaneous': Bool}, method_of=Expr),
     c(Matrix.flat, [], method_of=Matrix),
+    c(Matrix.transpose, [], method_of=Matrix),
     c(Poly.as_expr, [t(Symbol)], method_of=Poly),
     c(PowerBasis.__call__, [
         [DomainMatrix],
