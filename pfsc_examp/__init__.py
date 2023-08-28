@@ -89,6 +89,11 @@ class ErrCode:
     # over there.
     CONTROLLED_EVALUATION_EXCEPTION = 279
 
+    # Don't use anything in the range 10,000 - 10,999.
+    # This range is reserved for use by mathworker.js, on the client side.
+    RESERVED_FOR_MATHWORKER_ON_JS_SIDE_0 = 10000
+    RESERVED_FOR_MATHWORKER_ON_JS_SIDE_1 = 10999
+
 
 def rebuild_examp_generator_from_js(obj, value=None, write_html=False):
     to_js = from_import('pyodide', 'to_js')
