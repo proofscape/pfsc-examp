@@ -98,7 +98,7 @@ def safe_algebraic_func_str_to_sympy(raw_text, max_len=None, max_depth=None):
         `None`, we look for a value in the global config.
     @return: SymPy Expr
     @raise: ParsingExcep if given text is too long, or has too deep parenthesis
-      nesting (important to avoid exceeding recusion stack max depth), or if
+      nesting (important to avoid exceeding recursion stack max depth), or if
       it simply doesn't parse as a valid algebraic function.
     """
     check_expr_dims(raw_text, max_len=max_len, max_depth=max_depth)

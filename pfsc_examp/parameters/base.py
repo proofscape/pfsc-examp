@@ -570,11 +570,13 @@ class Parameter(ParametricValued):
         :param editable: only meaningful if `include_value` is True.
           In that case, `editable` True should yield e.g.
 
-            "$p$ <span class="edit_me">&nbsp;$= 7$</span> a prime"
+            "$p$ <span class="param_val">&nbsp;$= 7$</span> a prime"
 
           so that it's easy to edit the value on the client-side.
 
         :return: the description string
+
+        See Also: write_name_and_value()
         """
         raise NotImplementedError
 
