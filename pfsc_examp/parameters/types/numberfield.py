@@ -122,7 +122,7 @@ class NumberField_Param(Parameter):
         return f'{name_part} {noun_phrase}'
 
     def auto_build(self):
-        raw = 'cyc(4)'
+        raw = 'cyc(2)'
         return self.build_from_raw(raw)
 
     def build_from_raw(self, raw):
