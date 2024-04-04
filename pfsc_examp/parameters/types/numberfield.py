@@ -179,7 +179,7 @@ class NumberField_Param(Parameter):
         return nf_chooser_widget_template.render(context)
 
 nf_chooser_widget_template = jinja2.Template("""
-<div class="chooser nf_chooser" name="{{ name }}">
+<div class="chooser nf_chooser">
     <div class="heading">{{ descrip }}</div>
     <div class="error_display"></div>
     <input class="textfield polynomial_field" type="text" placeholder="Irreducible polynomial" value="{{current_value}}"/>

@@ -126,7 +126,7 @@ class Prime_Param(Parameter):
 
 
 prime_chooser_widget_template = jinja2.Template("""
-<div class="chooser radio_panel_chooser prime_chooser" name="{{ name }}">
+<div class="chooser radio_panel_chooser prime_chooser">
     <div class="heading">{{ descrip }}</div>
     <div class="error_display"></div>
     {# #}

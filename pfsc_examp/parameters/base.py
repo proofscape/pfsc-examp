@@ -610,7 +610,7 @@ def write_radio_panel_chooser_widget(name, descrip, code_and_text, selected=None
     return radio_panel_chooser_widget_template.render(context)
 
 radio_panel_chooser_widget_template = jinja2.Template("""
-<div class="chooser radio_panel_chooser" name="{{ name }}">
+<div class="chooser radio_panel_chooser">
     <div class="heading">{{ descrip }}</div>
     <div class="error_display"></div>
     <div class="radio_panel">

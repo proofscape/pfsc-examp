@@ -124,7 +124,7 @@ class PrimRes_Param(Parameter):
         return prim_res_chooser_widget_template.render(context)
 
 prim_res_chooser_widget_template = jinja2.Template("""
-<div class="chooser radio_panel_chooser prim_res_chooser" name="{{ name }}">
+<div class="chooser radio_panel_chooser prim_res_chooser">
     <div class="heading">{{ descrip }}</div>
     <div class="error_display"></div>
     {# #}

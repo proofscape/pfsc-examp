@@ -175,7 +175,7 @@ class Integer_Param(Parameter):
 
 
 int_chooser_widget_template = jinja2.Template("""
-<div class="chooser int_chooser" name="{{ name }}">
+<div class="chooser int_chooser">
     <div class="heading">{{ descrip }}</div>
     <div class="error_display"></div>
     <input class="textfield" type="text" placeholder="Integer" value="{{current_value}}"/>
