@@ -46,7 +46,7 @@ class Divisor_Param(Parameter):
 
     Args:
         Required:
-            dividing: int
+            dividing: int-valued
                 The number of which this is a divisor.
         Optional:
             sign: {-1, 0, 1}, default=1

@@ -38,13 +38,13 @@ class Integer_Param(Parameter):
     Args:
       Required: None.
       Optional:
-        coprime_to: int
+        coprime_to: int-valued
             Must be coprime to this.
-        dividing: int
+        dividing: int-valued
             Must divide this.
-        gt: int
+        gt: int-valued
             Must be greater than this.
-        lt: int
+        lt: int-valued
             Must be less than this.
     """
     

@@ -38,7 +38,7 @@ class PrimRes_Param(Parameter):
 
     Args:
         Required:
-            m: int
+            m: int-valued
                 The modulus.
         Optional: None.
     """

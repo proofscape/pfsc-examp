@@ -43,9 +43,9 @@ class PrimeIdeal_Param(Parameter):
 
     Args:
         Required:
-            k: Libpath
+            k: param-valued
                 Must point to a param widget of `NumberField` type.
-            p: int
+            p: int-valued
                 The rational prime whose ideal divisors we are to represent.
     """
 
