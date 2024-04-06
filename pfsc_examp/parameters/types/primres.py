@@ -51,10 +51,10 @@ class PrimRes_Param(Parameter):
         },
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.m = None
         # Depending on how big the modulus m is, we might store a list of all
         # of its primitive residues, or we might just store one primitive residue;
@@ -115,7 +115,6 @@ class PrimRes_Param(Parameter):
         elif self.one_option:
             ready_options = [self.one_option]
         context = {
-            'name': self.name,
             'descrip': self.auto_descrip(),
             'selected_res': self.value,
             'ready_options': ready_options,

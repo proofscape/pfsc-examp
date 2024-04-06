@@ -84,10 +84,10 @@ class NumberField_Param(Parameter):
         }
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.explicit_cyclo = False
         self.cyc_num = None
         self.raw = None
@@ -172,7 +172,6 @@ class NumberField_Param(Parameter):
 
     def write_chooser_widget(self):
         context = {
-            'name': self.name,
             'descrip': self.auto_descrip(),
             'current_value': self.raw,
         }

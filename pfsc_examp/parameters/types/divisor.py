@@ -70,10 +70,10 @@ class Divisor_Param(Parameter):
         }
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.divisors = []
         self.dividing = None
         self.sign = None
@@ -86,7 +86,7 @@ class Divisor_Param(Parameter):
         n = self.dividing.value
         c = calculate(divisor_count, n)
         if c > 200:  # FIXME: make such upper bounds configurable.
-            msg = f'Parameter {self.name} has too many notes, er divisors.'
+            msg = f'Parameter {self.getLibpath()} has too many notes, er divisors.'
             raise MalformedParamRawValue(msg, self)
         self.divisors = calculate(divisors, n)
         s = self.sign.value
@@ -115,6 +115,6 @@ class Divisor_Param(Parameter):
 
     def write_chooser_widget(self):
         return write_radio_panel_chooser_widget(
-            self.name, self.auto_descrip(), zip(self.divisors, self.divisors),
+            self.auto_descrip(), zip(self.divisors, self.divisors),
             self.value
         )

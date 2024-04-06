@@ -67,11 +67,6 @@ class MissingParamArgType(ExampError):
     pass
 
 
-class MissingName(ExampError):
-    """Parameter defn missing name arg."""
-    pass
-
-
 class MalformedExampImport(ExampError):
     """Import into a display was malformed."""
     pass

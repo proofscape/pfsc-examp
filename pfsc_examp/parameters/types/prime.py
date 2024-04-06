@@ -66,10 +66,10 @@ class Prime_Param(Parameter):
         }
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.odd_only = None
         self.chooser_upper_bound = None
 
@@ -114,7 +114,6 @@ class Prime_Param(Parameter):
                 show_free_box = False
                 tdp = filter(lambda p: p <= self.chooser_upper_bound.value, tdp)
         context = {
-            'name': self.name,
             'selected_prime': self.value,
             'descrip': self.auto_descrip(),
             'primes_under_100': pu100,

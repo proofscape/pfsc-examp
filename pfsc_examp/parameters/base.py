@@ -30,7 +30,6 @@ from pfsc_examp.excep import (
     MalformedParamRawValue,
     UnexpectedParamArgError,
     UnexpectedParamArgTypeError,
-    MissingName,
     UnresolvedParamArgError,
     MissingParamArgType,
 )
@@ -122,16 +121,15 @@ class Parameter(ParametricValued):
     The abstract base class for all parameter types.
     """
 
-    def __init__(self, parent, name,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None):
         """
         :param parent: reference to a governing object. Could be a
           PyodideWidgetStandIn when operating in Pyodide, or a ParamWidget when
           operating in pfsc-server.
 
-        :param name: (str) the name by which the parameter is known. Often
-          coincident with the desired TeX string.
+        :param tex: string to be used in TeX representations.
 
         :param default: some specification of a default value for this parameter.
           May be of various types; it is up to the subclass to interpret.
@@ -140,9 +138,6 @@ class Parameter(ParametricValued):
 
           May be left unspecified (None), and then the subclass's auto_build
           method will be engaged at build time.
-
-        :param tex: string to be used in TeX representations; if left None,
-          self.name will be used instead.
 
         :param descrip: optional string giving a textual description of this
           parameter, for the benefit of users; however, it is more common to
@@ -176,14 +171,10 @@ class Parameter(ParametricValued):
           particular, it will take precedence over `self.default` when we build.
         """
         self.parent = parent
-        if not name:
-            raise MissingName
-        self.name = name
+        self.tex = tex
         self.default = default
         self.last_attempted_raw_value = last_raw
-        if tex is None:
-            tex = name
-        self.tex = tex
+
         self.descrip = descrip
         self.given_args = args or {}
         # Dict in which param name points to Parameter instance:
@@ -359,7 +350,6 @@ class Parameter(ParametricValued):
         There are optional prebuild and postbuild hooks that subclasses may
         override.
         """
-        #print(f'{self.name}: raw: {raw}, last: {self.last_attempted_raw_value}, default: {self.default}')
         raw = adapt(raw)
         if raw is not None:
             self.last_attempted_raw_value = raw
@@ -499,8 +489,10 @@ class Parameter(ParametricValued):
             If the parser you need isn't defined there yet, please consider writing
             it and contributing via pull request.
 
-        @param name: the name of the argument
-        @param raw: the raw value of the argument
+        @param name: the name of the argument.
+            Note: Although `name` is not used in this method, it may well be used in
+            subclass overrides of this method.
+        @param raw: the raw value of the argument.
 
         @return: an instance of `Valued`, or `None`
         """
@@ -593,9 +585,9 @@ class Parameter(ParametricValued):
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def write_radio_panel_chooser_widget(name, descrip, code_and_text, selected=None):
+
+def write_radio_panel_chooser_widget(descrip, code_and_text, selected=None):
     """
-    :param name: the name of the parameter (e.g. 'frp')
     :param descrip: the parameter's description (e.g. '$\\mathfrak{p}$ a prime ideal')
     :param code_and_text: list of pairs (c, t) in which t is the text that should
       appear on the button, e.g. '$(13, x^2 + 3 x + 1)$' and c the code that
@@ -608,6 +600,7 @@ def write_radio_panel_chooser_widget(name, descrip, code_and_text, selected=None
     context = {}
     context.update(locals())
     return radio_panel_chooser_widget_template.render(context)
+
 
 radio_panel_chooser_widget_template = jinja2.Template("""
 <div class="chooser radio_panel_chooser">

@@ -60,10 +60,10 @@ class PrimeIdeal_Param(Parameter):
         }
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.field = None
         self.prime = None
         self.prime_ideals = None
@@ -88,7 +88,6 @@ class PrimeIdeal_Param(Parameter):
             self.display_values = [self.write_display_value_for_prime_ideal(P)
                                    for P in self.prime_ideals]
             self.last_attempted_raw_value = None
-            #print(f'{self.name}: reset last to None')
             self.last_field_value = K
             self.last_prime_value = p
 
@@ -117,7 +116,7 @@ class PrimeIdeal_Param(Parameter):
 
     def write_chooser_widget(self):
         return write_radio_panel_chooser_widget(
-            self.name, self.auto_descrip(),
+            self.auto_descrip(),
             enumerate([f'${v}$' for v in self.display_values]),
             self.selected_index
         )

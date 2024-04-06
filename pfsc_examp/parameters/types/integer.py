@@ -65,10 +65,10 @@ class Integer_Param(Parameter):
         }
     }
 
-    def __init__(self, parent, name=None,
-                 default=None, tex=None, descrip=None, params=None,
+    def __init__(self, parent, tex=None,
+                 default=None, descrip=None, params=None,
                  args=None, last_raw=None, **other):
-        super().__init__(parent, name, default, tex, descrip, params, args, last_raw)
+        super().__init__(parent, tex, default, descrip, params, args, last_raw)
 
     def get_name_for_extra(self, predicate_name):
         a = self.resolved_args.get(predicate_name, None)
@@ -168,7 +168,6 @@ class Integer_Param(Parameter):
 
     def write_chooser_widget(self):
         return write_int_chooser_widget(
-            self.name,
             self.auto_descrip(),
             current_value=self.value
         )
@@ -183,7 +182,7 @@ int_chooser_widget_template = jinja2.Template("""
 """)
 
 
-def write_int_chooser_widget(name, descrip, current_value):
+def write_int_chooser_widget(descrip, current_value):
     context = {}
     context.update(locals())
     return int_chooser_widget_template.render(context)
