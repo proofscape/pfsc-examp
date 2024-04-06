@@ -115,7 +115,7 @@ def test_nf_param_root_idx():
 
     # Now we specify the real cube root of 2:
     d['args'] = {
-        'root_idx': 0
+        'rootIdx': 0
     }
     nfp = NumberField_Param(None, **d)
     nfp.build()

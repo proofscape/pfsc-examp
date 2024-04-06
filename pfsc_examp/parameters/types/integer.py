@@ -38,7 +38,7 @@ class Integer_Param(Parameter):
     Args:
       Required: None.
       Optional:
-        coprime_to: int-valued
+        coprimeTo: int-valued
             Must be coprime to this.
         dividing: int-valued
             Must divide this.
@@ -50,7 +50,7 @@ class Integer_Param(Parameter):
     
     arg_spec = {
         "OPT": {
-            'coprime_to': {
+            'coprimeTo': {
                 'type': Integer,
             },
             'dividing': {
@@ -91,12 +91,12 @@ class Integer_Param(Parameter):
         # value. This is more informative for the user.
 
         D = self.get_arg_value('dividing')
-        C = self.get_arg_value('coprime_to')
+        C = self.get_arg_value('coprimeTo')
         G = self.get_arg_value('gt')
         L = self.get_arg_value('lt')
 
         D_name = self.get_name_for_extra('dividing')
-        C_name = self.get_name_for_extra('coprime_to')
+        C_name = self.get_name_for_extra('coprimeTo')
         G_name = self.get_name_for_extra('gt')
         L_name = self.get_name_for_extra('lt')
 
@@ -117,7 +117,7 @@ class Integer_Param(Parameter):
     def auto_descrip(self, include_value=True, editable=True):
         # Start by getting any optional, related parameters.
         dividing_str = self.get_name_for_extra('dividing')
-        coprime_str = self.get_name_for_extra('coprime_to')
+        coprime_str = self.get_name_for_extra('coprimeTo')
         lb_str = self.get_name_for_extra('gt')
         ub_str = self.get_name_for_extra('lt')
 

@@ -60,7 +60,7 @@ class NumberField_Param(Parameter):
                 irreducible polynomial.
                 If not supplied, we use `x` for `cyc(n)`, or the
                 given variable for polynomials given explicitly.
-            root_idx: int
+            rootIdx: int
                 Root index, indicating which root of the minimal polynomial to
                 use as primitive element for the field. This is passed to
                 SymPy's `CRootOf`. Real roots come first, in increasing order,
@@ -77,7 +77,7 @@ class NumberField_Param(Parameter):
             'var': {
                 'type': Symbol,
             },
-            'root_idx': {
+            'rootIdx': {
                 'type': Integer,
                 'default_raw': -1,
             }
@@ -161,7 +161,7 @@ class NumberField_Param(Parameter):
                 msg = r'Polynomial must be irreducible over $\mathbb{Q}$.'
                 raise MalformedParamRawValue(msg, self)
 
-        i = self.resolved_args['root_idx'].value
+        i = self.resolved_args['rootIdx'].value
         root = calculate(construct_instance, CRootOf, poly_value, i)
         ext = calculate(construct_instance, AlgebraicNumber,
                         (poly_value, root),

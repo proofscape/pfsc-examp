@@ -43,7 +43,7 @@ class Prime_Param(Parameter):
       Optional:
         odd: boolean, default=False
             True if you require that it be an odd prime
-        chooser_upper_bound: int
+        chooserUpperBound: int
             If positive, do not display primes larger than this in
             the chooser HTML. Note: This is not a *mathematical* constraint;
             you are not saying that the prime actually needs to be bounded
@@ -59,7 +59,7 @@ class Prime_Param(Parameter):
                 'type': BooleanAtom,
                 'default_raw': False,
             },
-            'chooser_upper_bound': {
+            'chooserUpperBound': {
                 'type': Integer,
                 'default_raw': 0,
             },
@@ -71,11 +71,11 @@ class Prime_Param(Parameter):
                  args=None, last_raw=None, **other):
         super().__init__(parent, tex, default, descrip, params, args, last_raw)
         self.odd_only = None
-        self.chooser_upper_bound = None
+        self.chooserUpperBound = None
 
     def prebuild(self):
         self.odd_only = self.resolved_args['odd']
-        self.chooser_upper_bound = self.resolved_args['chooser_upper_bound']
+        self.chooserUpperBound = self.resolved_args['chooserUpperBound']
 
     def auto_build(self):
         raw = 3 if self.odd_only.value else 2
@@ -102,17 +102,17 @@ class Prime_Param(Parameter):
         show_free_box = True
         # Prepare our list of primes under 100 (possibly modified):
         pu100 = primes_under_100[1 if self.odd_only.value else 0:]
-        if 0 < self.chooser_upper_bound.value <= 100:
+        if 0 < self.chooserUpperBound.value <= 100:
             show_three_digit_primes = False
             show_free_box = False
-            pu100 = filter(lambda p: p <= self.chooser_upper_bound.value, pu100)
+            pu100 = filter(lambda p: p <= self.chooserUpperBound.value, pu100)
         # Prepare our list of three-digit primes (possibly modified):
         tdp = None
         if show_three_digit_primes:
             tdp = three_digit_primes[:]
-            if 100 < self.chooser_upper_bound.value <= 1000:
+            if 100 < self.chooserUpperBound.value <= 1000:
                 show_free_box = False
-                tdp = filter(lambda p: p <= self.chooser_upper_bound.value, tdp)
+                tdp = filter(lambda p: p <= self.chooserUpperBound.value, tdp)
         context = {
             'selected_prime': self.value,
             'descrip': self.auto_descrip(),
