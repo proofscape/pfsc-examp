@@ -22,8 +22,9 @@ The set is expected to grow over time, in response to user demand.
 """
 
 from sympy import (
-    AlgebraicField, AlgebraicNumber, binomial, Expr, Integer, latex,
-    Matrix, mod_inverse, Poly, QQ, S, Symbol, symbols,
+    AlgebraicField, AlgebraicNumber, binomial, Expr, factorint,
+    Integer, isprime, latex,
+    Matrix, mod_inverse, Poly, primerange, QQ, S, Symbol, symbols,
 )
 from sympy.core.evalf import EvalfMixin
 from sympy.logic.boolalg import Boolean
@@ -78,10 +79,13 @@ sympy_basic_allowed_callables = [
     c(S, [u[int, float]], name="S"),
 
     c(binomial, [Int, Int]),
+    c(factorint, [Int]),
+    c(isprime, [Int]),
     c(latex, [[Expr], [Matrix]], {'order': s.CNAME}, incomplete=True),
     c(Matrix, [List[List[fiExpr]]], name="Matrix"),
     c(mod_inverse, [Int, Int]),
     c(Poly, [Expr, t(Symbol)], {'modulus': Int}, incomplete=True),
+    c(primerange, [Int]),
     c(Symbol, [s.UWORD]),
     c(symbols, [s.UWORD_CDL]),
 ]
