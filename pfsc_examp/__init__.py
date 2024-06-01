@@ -30,7 +30,7 @@ from pfsc_examp.util import adapt
 from pfsc_util.imports import from_import
 
 
-__version__ = "0.24.0a0"
+__version__ = "0.24.0"
 
 
 def make_examp_generator_obj_from_js(info, pane_id):
